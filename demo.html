@@ -1,12 +1,44 @@
 <!doctype html>
 <html lang="zh_TW">
     <head>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.5/require.min.js"></script>
-        <script>
-if (typeof require == "undefined")
-    document.write("\x3Cscript src=\"vendor/require-2.1.6.js\">\x3C/script>");
+        <link rel="stylesheet" href="demo.css" type="text/css">
 
+        <script src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.5/require.min.js"></script>
+        <script> "undefined" === typeof require && document.write("\x3Cscript src=\"vendor/require-2.1.6.js\">\x3C/script>");</script>
+    </head>
+    <body>
+        <div id="wrapper">
+            <form id="mainfrm">
+                <div class="input clearfix">
+                    <label for="frm_proxy">Proxy: </label>
+                    <input type="text" id="frm_proxy" name="proxy" value="proxy.php">
+                </div>
+                <div class="input clearfix">
+                    <label for="frm_server">Server: </label>
+                    <input type="text" id="frm_server" name="server" value="https://m2.exosite.com/api:v1/stack/alias">
+                </div>
+                <div class="input clearfix">
+                    <label for="frm_cik">CIK: </label>
+                    <input type="text" id="frm_cik" name="cik" value="ENTER CIK HERE">
+                </div>
+                <div class="input clearfix">
+                    <label for="frm_message"> message: </label>
+                    <input type="text" id="frm_message" name="message">
+                </div>
+                <div class="input clearfix">
+                    <label for="frm_number">number: </label>
+                    <input type="number" id="frm_number" name="number">
+                </div>
+                <div class="actions">
+                    <button class="pull-left" id="frm_push">Push</button>
+                    <button class="pull-right" id="frm_pull">Pull</button>
+                </div>
+            </form>
+        </div>
+    </body>
+    <script>
 require.config({
+    urlArgs: "bust=" +  (new Date()).getTime(),
     paths:{
         'jquery': [
             '//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min',
@@ -16,9 +48,5 @@ require.config({
 });
 
 require(['demo'], function(obj){obj.init()});
-
-        </script>
-    </head>
-    <body>
-    </body>
+    </script>
 </html>

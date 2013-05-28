@@ -1,0 +1,9 @@
+/* == GENERIC == */
+.pull-right {float:right;}
+.pull-left{float:left;}
+
+/* == Layout == */
+
+#wrapper {width:580px;}
+.input label {float:left; width:14%;text-align:right;margin:.2em 2% .2em 0;padding:0;}
+.input input, .input textarea, .input select {width:72%;margin:.2em 2%;}
