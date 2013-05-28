@@ -1,9 +1,20 @@
 /* == GENERIC == */
-.pull-right {float:right;}
-.pull-left{float:left;}
-
+.pull-right {float:right;margin-right:1em;}
+.pull-left{float:left;margin-left:1em;}
+.clearfix {clear:both;}
 /* == Layout == */
 
-#wrapper {width:580px;}
+#wrapper {width:580px;margin:0 auto;}
 .input label {float:left; width:14%;text-align:right;margin:.2em 2% .2em 0;padding:0;}
-.input input, .input textarea, .input select {width:72%;margin:.2em 2%;}
+.input input, .input textarea, .input select {width:71%;margin:.2em 2%;padding:.1em .5%;}
+
+output {display:block;overflow-y:auto;}
+output {
+    border:1px gray solid;
+    width:95%;
+    margin:.2em auto;
+    padding:.1em .5%;
+    min-height:8em;
+    max-height:24em;
+}
+output p {margin:0;}
