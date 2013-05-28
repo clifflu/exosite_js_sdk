@@ -2,12 +2,16 @@
 <html lang="zh_TW">
     <head>
         <link rel="stylesheet" href="demo.css" type="text/css">
+        <link href='http://fonts.googleapis.com/css?family=Bubblegum+Sans|Libre+Baskerville|Sancreek' rel='stylesheet' type='text/css'>
 
         <script src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.5/require.min.js"></script>
         <script> "undefined" === typeof require && document.write("\x3Cscript src=\"vendor/require-2.1.6.js\">\x3C/script>");</script>
     </head>
     <body>
         <div id="wrapper">
+            <header>
+                <h1>Demo for Exosite web sdk</h1>
+            </header>
             <form id="mainfrm">
                 <div class="input clearfix">
                     <label for="frm_proxy">Proxy: </label>
@@ -29,15 +33,13 @@
                     <label for="frm_number">number: </label>
                     <input type="number" id="frm_number" name="number" step="any">
                 </div>
-                <div class="actions">
+                <div class="actions clearfix">
                     <button class="pull-left" id="frm_push">Push</button>
                     <button class="pull-right" id="frm_pull">Pull</button>
                 </div>
             </form>
 
-            <output class="clearfix">
-                
-            </output>
+            <output class="clearfix"></output>
         </div>
     </body>
     <script>

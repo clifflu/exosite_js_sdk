@@ -12,17 +12,21 @@ function($, sdk, undefined){
         }
     }
 
-    function appendmsg(msg, prefix) {
+    function appendmsg(msg, padding) {
         var time, now;
-
-        if (prefix == undefined) 
-            prefix = '';
 
         now = new Date();
         time = $('<time>').append(
             String.sprintf('%02d:%02d:%02d.%03d', now.getHours(), now.getMinutes(), now.getSeconds(), now.getMilliseconds())
         );
-        jc.output.append($('<p>').append(time).append(prefix + msg));
+
+        if (padding == undefined) 
+            padding = '';
+        else
+            padding = $('<span class="padding">').append(padding);
+
+        jc.output.append($('<p>').append(time).append(padding).append(msg));
+        jc.output.scrollTop(100);
     }
 
     function _conf() {
@@ -37,7 +41,7 @@ function($, sdk, undefined){
 
     function pull() {
         var attr = ['message', 'number'],
-            msg_hdr = '&lt;&lt; ';
+            msg_hdr = '&lt;&lt;';
 
         appendmsg('Pulling from server', msg_hdr);
 
@@ -56,7 +60,7 @@ function($, sdk, undefined){
                 'message'   : jc.message.val(),
                 'number'    : jc.number.val()
             },
-            msg_hdr = '&gt;&gt; ';
+            msg_hdr = '&gt;&gt;';
 
         appendmsg('Pushing to server', msg_hdr);
 
