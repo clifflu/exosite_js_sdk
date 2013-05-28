@@ -20,7 +20,7 @@ function($, sdk, undefined){
 
         now = new Date();
         time = $('<time>').append(
-            String.sprintf('%2d:%2d:%2d.%3d', now.getHours(), now.getMinutes(), now.getSeconds(), now.getMilliseconds())
+            String.sprintf('%02d:%02d:%02d.%03d', now.getHours(), now.getMinutes(), now.getSeconds(), now.getMilliseconds())
         );
         jc.output.append($('<p>').append(time).append(prefix + msg));
     }
