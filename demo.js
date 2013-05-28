@@ -1,3 +1,7 @@
+/**
+ * Module "demo" - Handles UI of demo.html
+ * 
+ */
 define("demo", ['jquery', 'exosite_websdk'], 
 function($, sdk, undefined){
     var jc ;    // jquery object cache
@@ -12,7 +16,7 @@ function($, sdk, undefined){
 
         return conf;
     }
-    
+
     function pull() {
         var attr = ['message', 'number'];
 

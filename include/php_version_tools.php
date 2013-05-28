@@ -1,6 +1,13 @@
 <?php
+/**
+ * PHP Version Tools
+ */
 
-
+/**
+ * Gets PHP version info
+ * 
+ * @return array(major, minor, release)
+ */
 function php_version_arr() {
     if (preg_match('/^(\d+)\.(\d+)\.(\d+)/', PHP_VERSION, $ver)) {
         array_shift($ver);
@@ -9,6 +16,16 @@ function php_version_arr() {
     return array();
 }
 
+/**
+ * Test if PHP version matches 
+ * 
+ * @param  string gt|gte|lt|lte, stands for 'greater than', 'greater than or equal', 
+ *          'less than', 'less than or equal' respectively
+ * @param  int $major
+ * @param  int $minor
+ * @param  int $release
+ * @return bool
+ */
 function php_version_is($verb, $major, $minor = null, $release = null) {
     $ver = php_version_arr();
 

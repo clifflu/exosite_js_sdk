@@ -1,3 +1,7 @@
+/**
+ * Module exosite_websdk - Passes data to and from Exosite via php proxy
+ *
+ */
 define("exosite_websdk", ["jquery"],
 function($,undefined){
     var default_config = {
