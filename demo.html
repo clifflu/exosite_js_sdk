@@ -3,7 +3,22 @@
     <head>
         <link rel="stylesheet" href="demo.css" type="text/css">
         <link href='http://fonts.googleapis.com/css?family=Bubblegum+Sans|Libre+Baskerville|Sancreek' rel='stylesheet' type='text/css'>
-
+        <script>
+        var require = ({
+            urlArgs: "bust=" +  (new Date()).getTime(),
+            paths:{
+                'jquery': [
+                    '//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min',
+                    'vendor/jquery-2.0.1'
+                ]
+            },
+            shim: {
+                'demo': {
+                    'deps': ['jquery', 'exosite_websdk', 'extends']
+                }
+            }
+        });
+        </script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.5/require.min.js"></script>
         <script> "undefined" === typeof require && document.write("\x3Cscript src=\"vendor/require-2.1.6.js\">\x3C/script>");</script>
     </head>
@@ -40,24 +55,13 @@
             </form>
 
             <output class="clearfix"></output>
+
+            <footer class="pull-right">
+The project is <a href="https://github.com/clifflu/exosite_js_sdk">hosted</a> on <a href="http://github.com">GitHub</a>.
+            </footer>
+            <script>
+                require(['demo'], function(obj){obj.init()});
+            </script>
         </div>
     </body>
-    <script>
-require.config({
-    urlArgs: "bust=" +  (new Date()).getTime(),
-    paths:{
-        'jquery': [
-            '//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min',
-            'vendor/jquery-2.0.1'
-        ]
-    },
-    shim: {
-        'demo': {
-            'deps': ['jquery', 'exosite_websdk', 'extends']
-        }
-    }
-});
-
-require(['demo'], function(obj){obj.init()});
-    </script>
 </html>

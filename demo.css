@@ -30,3 +30,8 @@ output {
 output p {margin:0;}
 output time {margin:0 .2em;font-size:90%;font-family: 'Bubblegum Sans', cursive;}
 output .padding {margin:0 .2em;}
+
+footer {
+    font-size:40%;
+    padding: .5em 3%;
+}
