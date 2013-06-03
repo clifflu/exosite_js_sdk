@@ -7,8 +7,25 @@
  * 
  */
 
-require_once('include/http_response_code.php');
-require_once('include/json_encode_unescaped_unicode.php');
+require('include/http_response_code.php');
+require('include/json_encode_unescaped_unicode.php');
+require('include/csrf_guard.php');
+
+// Request headers
+$headers_in = getallheaders();
+
+// CSRF
+$cg = Csrf_Guard::forge();
+
+$csrf_seed = @$headers_in['X-CSRF-Seed'];
+$csrf_token = @$headers_in['X-CSRF-Token'];
+
+if (!$cg->verify_token($csrf_seed, $csrf_token)) {
+    // verification failed
+    http_response_code('401');
+    echo "Failed CSRF validation";
+    die();
+}
 
 // Keys to keep from the request header, and pass to remote server
 $headers_keep = array(
@@ -18,8 +35,9 @@ $headers_keep = array(
     'x-forwarded-for'
 );
 
-$headers_in = getallheaders();
+// Request header to be built
 $headers_out = array();
+
 foreach($headers_in as $key => $value) {
     if (in_array(strtolower($key), $headers_keep)) {
         // $key cases are preserved
@@ -64,7 +82,7 @@ $ret = curl_exec($ch);
 $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 curl_close($ch);
 
-// bubbles http code
+// returns http code from API server
 if ($http_code) {
     http_response_code($http_code);
 }

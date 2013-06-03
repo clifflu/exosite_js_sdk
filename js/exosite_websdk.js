@@ -19,23 +19,23 @@ function($,undefined){
     //  Return:
     //      jqXHR (Promise) object
     //
-    function push(data, config){
+    function push(data, config, headers){
         var my_config, 
             header;
 
         my_config = $.extend({}, default_config, config);
 
-        headers = {
+        headers = $.extend({}, headers, {
             'X-Exosite-CIK' : encodeURIComponent(my_config.cik),
             'X-Server-URL'  : encodeURIComponent(my_config.server),
             'Content-type'  : 'application/x-www-form-urlencoded; charset=utf-8'
-        }
+        });
 
         return $.ajax(my_config.proxy, {
             "type"      : "POST",
             "headers"   : headers,
             "data"      : data
-        })
+        });
     }
 
     // 
@@ -48,7 +48,7 @@ function($,undefined){
     //  Return:
     //      jqXHR (Promise) object, response body is JSON {DATA_ALIAS: DATA_VALUE, ...}
     //
-    function pull(attr, config){
+    function pull(attr, config, headers){
         var my_config, 
             header, 
             tmp;
@@ -67,11 +67,11 @@ function($,undefined){
 
         my_config = $.extend({}, default_config, config);
 
-        headers = {
+        headers = $.extend({}, headers, {
             'X-Exosite-CIK' : encodeURIComponent(my_config.cik),
             'X-Server-URL'  : encodeURIComponent(my_config.server) + '?' + attr.join('&'),
             'Accept'        : 'application/x-www-form-urlencoded; charset=utf-8'
-        }
+        });
 
         return $.ajax(my_config.proxy, {
             "type"      : "GET",

@@ -8,7 +8,12 @@ function($, sdk, undefined){
 
     function log_http_code_curry(msg_hdr) {
         return function(xhr, textStatus){
-            appendmsg('HTTP ' + xhr.status + ' [' + xhr.statusText + ']', msg_hdr);
+            var msg = 'HTTP ' + xhr.status + ' [' + xhr.statusText + ']';
+            if (xhr.responseText) {
+                msg += (': ' + xhr.responseText);
+            }
+            console.log(xhr);
+            appendmsg(msg, msg_hdr);
         }
     }
 
@@ -39,15 +44,21 @@ function($, sdk, undefined){
         return conf;
     }
 
+    function _csrf() {
+        return {
+            'X-CSRF-Token'  : jc.csrf.token.val(),
+            'X-CSRF-Seed'   : jc.csrf.seed.val()
+        };
+    }
+
     function pull() {
         var attr = ['message', 'number'],
             msg_hdr = '&lt;&lt;';
 
         appendmsg('Pulling from server', msg_hdr);
 
-        sdk.pull(attr, _conf())
+        sdk.pull(attr, _conf(), _csrf())
         .done(function(response){
-            appendmsg("Got raw output: " + response, msg_hdr);
             response = JSON.parse(response);
 
             jc.message.val(response.message);
@@ -64,19 +75,23 @@ function($, sdk, undefined){
 
         appendmsg('Pushing to server', msg_hdr);
 
-        sdk.push(data, _conf()).complete(log_http_code_curry(msg_hdr));
+        sdk.push(data, _conf(), _csrf()).complete(log_http_code_curry(msg_hdr));
     }
 
     function init() {
         // build cache
-        jc = {};
-
-        jc.proxy = $('#frm_proxy');
-        jc.server = $('#frm_server');
-        jc.cik = $('#frm_cik');
-        jc.message = $('#frm_message');
-        jc.number = $('#frm_number');
-        jc.output = $('output');
+        jc = {
+            "cik"     : $('#frm_cik'),
+            "csrf"    : {
+                "seed"    : $('#frm_csrf_seed'),
+                "token"   : $('#frm_csrf_token')
+            },
+            "message" : $('#frm_message'),
+            "number"  : $('#frm_number'),
+            "output"  : $('output'),
+            "proxy"   : $('#frm_proxy'),
+            "server"  : $('#frm_server')
+        };
 
         // disable form submission by buttons
         $('form').off('submit').on('submit', function(){return false;})
