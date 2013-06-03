@@ -25,7 +25,7 @@ function($, sdk, undefined){
         else
             padding = $('<span class="padding">').append(padding);
 
-        jc.output.append($('<p>').append(time).append(padding).append(msg));
+        jc.output.append($('<p>').append(time).append(padding).append($('<span>').text(msg)));
         jc.output.scrollTop(100);
     }
 
